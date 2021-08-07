@@ -1,7 +1,7 @@
 package com.wxf.springframework.beans.factory.support;
 
 
-import com.wxf.springframework.beans.BaseException;
+import com.wxf.springframework.beans.BeansException;
 import com.wxf.springframework.beans.factory.factory.BeanDefinition;
 
 import java.util.HashMap;
@@ -23,10 +23,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     }
 
     @Override
-    protected BeanDefinition getBeanDefinition(String beanName) throws BaseException {
+    protected BeanDefinition getBeanDefinition(String beanName) throws BeansException {
         BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
         if (beanDefinition == null) {
-            throw new BaseException("No bean named '" + beanName + "' is defined");
+            throw new BeansException("No bean named '" + beanName + "' is defined");
         }
         return beanDefinition;
     }

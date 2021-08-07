@@ -1,6 +1,6 @@
 package com.wxf.springframework.beans.factory;
 
-import com.wxf.springframework.beans.BaseException;
+import com.wxf.springframework.beans.BeansException;
 
 /**
  * beanFactory
@@ -15,7 +15,18 @@ public interface BeanFactory {
      *
      * @param name bean名称
      * @return
-     * @throws BaseException
+     * @throws BeansException
      */
-    Object getBean(String name) throws BaseException;
+    Object getBean(String name) throws BeansException;
+
+
+    /**
+     * 根据bean名称和参数获取bean对象
+     *
+     * @param name bean名称
+     * @param args 参数
+     * @return
+     * @throws BeansException
+     */
+    Object getBean(String name, Object... args) throws BeansException;
 }

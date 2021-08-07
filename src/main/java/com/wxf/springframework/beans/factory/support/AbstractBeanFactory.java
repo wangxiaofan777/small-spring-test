@@ -1,6 +1,6 @@
 package com.wxf.springframework.beans.factory.support;
 
-import com.wxf.springframework.beans.BaseException;
+import com.wxf.springframework.beans.BeansException;
 import com.wxf.springframework.beans.factory.BeanFactory;
 import com.wxf.springframework.beans.factory.factory.BeanDefinition;
 
@@ -13,7 +13,7 @@ import com.wxf.springframework.beans.factory.factory.BeanDefinition;
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
 
     @Override
-    public Object getBean(String name) throws BaseException {
+    public Object getBean(String name) throws BeansException {
         Object bean = getSingleton(name);
         if (bean != null) {
             return bean;
@@ -23,22 +23,44 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
         return createBean(name, beanDefinition);
     }
 
+    @Override
+    public Object getBean(String name, Object... args) throws BeansException {
+        Object bean = getSingleton(name);
+        if (bean != null) {
+            return bean;
+        }
+        BeanDefinition beanDefinition = getBeanDefinition(name);
+        return createBean(name, beanDefinition, args);
+    }
+
     /**
      * 根据beanName 获取BeanDefinition
      *
      * @param beanName bean名称
      * @return
-     * @throws BaseException
+     * @throws BeansException
      */
-    protected abstract BeanDefinition getBeanDefinition(String beanName) throws BaseException;
+    protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;
 
     /**
      * 创建bean对象
      *
-     * @param beanName
-     * @param beanDefinition
+     * @param beanName       bean名称
+     * @param beanDefinition bean定义
      * @return
-     * @throws BaseException
+     * @throws BeansException
      */
-    protected abstract Object createBean(String beanName, BeanDefinition beanDefinition) throws BaseException;
+    protected abstract Object createBean(String beanName, BeanDefinition beanDefinition) throws BeansException;
+
+    /**
+     * 创建bean对象
+     *
+     * @param beanName       bean名称
+     * @param beanDefinition bean定义
+     * @param args           参数
+     * @return
+     * @throws BeansException
+     */
+    protected abstract Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException;
+
 }

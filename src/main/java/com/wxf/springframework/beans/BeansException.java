@@ -6,17 +6,17 @@ package com.wxf.springframework.beans;
  * @author WangMaoSong
  * @date 2021/8/4
  */
-public class BaseException extends Exception {
+public class BeansException extends Exception {
 
-    public BaseException() {
+    public BeansException() {
         super();
     }
 
-    public BaseException(String message) {
+    public BeansException(String message) {
         super(message);
     }
 
-    public BaseException(String message, Throwable cause) {
+    public BeansException(String message, Throwable cause) {
         super(message, cause);
     }
 }
